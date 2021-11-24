@@ -1,5 +1,16 @@
+// loads random numbers
+const numbersBox = document.getElementById('number-box');
+const rndNumbers = rnd5Numbers();
 
-console.log(rnd5Numbers());
+rndNumbers.forEach((num, i) => {
+    
+    if (i == rndNumbers.length - 1) {
+        numbersBox.innerHTML += num;
+    } else {
+        numbersBox.innerHTML += num + ', ';
+    }
+
+});
 
 
 
