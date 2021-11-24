@@ -3,8 +3,10 @@ const numbersBox = document.getElementById('number-box');
 const rndNumbers = rnd5Numbers();
 
 loadNum(numbersBox, rndNumbers);
-console.log(rndNumbers);
-startGame(rndNumbers);
+
+//load function after 30 secons
+setTimeout(startGame, 30000, rndNumbers)
+
 
 // ***** functions *****
 
@@ -53,25 +55,29 @@ function startGame(computerNum) {
     // hide numbers
     numbersBox.classList.add('d-none');
 
-    // ask numbers and add if correct
-    const userCorrectNum = [];
-
-    for (let i = 0; i < 5; i++) {
-
-        const userNum = parseInt(prompt('Inserisci uno dei 5 numeri:'));
-
-        if (computerNum.includes(userNum) && !userCorrectNum.includes(userNum)) {
-            userCorrectNum.push(userNum);
+    setTimeout(function(){
+        
+        // ask numbers and add if correct
+        const userCorrectNum = [];
+    
+        for (let i = 0; i < 5; i++) {
+    
+            const userNum = parseInt(prompt('Inserisci uno dei 5 numeri:'));
+    
+            if (computerNum.includes(userNum) && !userCorrectNum.includes(userNum)) {
+                userCorrectNum.push(userNum);
+            }
+    
         }
+    
+        // load message
+        const messageBox = document.getElementById('message');
+        messageBox.innerHTML = `Hai indovinato ${userCorrectNum.length} numeri su 5`;
+    
+        // load correct numbers
+        loadNum(numbersBox, userCorrectNum);
+        numbersBox.classList.remove('d-none');
 
-    }
-
-    // load message
-    const messageBox = document.getElementById('message');
-    messageBox.innerHTML = `Hai indovinato ${userCorrectNum.length} numeri su 5`;
-
-    // load correct numbers
-    loadNum(numbersBox, userCorrectNum);
-    numbersBox.classList.remove('d-none');
+    }, 100);
 
 }
